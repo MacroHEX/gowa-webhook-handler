@@ -17,3 +17,10 @@ type MessageData struct {
 	IsFromMe  bool   `json:"is_from_me"`
 	Timestamp string `json:"timestamp"`
 }
+type GowaResponse struct {
+	Status  bool   `json:"status"`
+	Message string `json:"message"`
+	Data    struct {
+		ID string `json:"id"`
+	} `json:"data"`
+}
