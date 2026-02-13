@@ -1,35 +1,19 @@
 package models
 
-// WebhookPayload es la raíz del JSON de GoWa
+// WebhookPayload representa la raíz del JSON
 type WebhookPayload struct {
 	Event    string      `json:"event"`
 	DeviceId string      `json:"device_id"`
 	Payload  MessageData `json:"payload"`
 }
 
-// MessageData contiene los detalles del evento
+// MessageData mapeado según tu DEBUG JSON real
 type MessageData struct {
-	Info struct {
-		ID        string `json:"id"`
-		Sender    string `json:"sender"`
-		PushName  string `json:"pushName"`
-		Timestamp int64  `json:"timestamp"`
-		IsFromMe  bool   `json:"isFromMe"`
-	} `json:"info"`
-	// GoWa envía el contenido en este formato
-	Message struct {
-		Conversation string `json:"conversation"` // Mensaje de texto simple
-		// Si el mensaje tiene links o formato, viene aquí:
-		ExtendedTextMessage struct {
-			Text string `json:"text"`
-		} `json:"extendedTextMessage"`
-	} `json:"message"`
-}
-
-// GetText extrae el texto sin importar el formato del mensaje
-func (m *MessageData) GetText() string {
-	if m.Message.Conversation != "" {
-		return m.Message.Conversation
-	}
-	return m.Message.ExtendedTextMessage.Text
+	ID        string `json:"id"`
+	Body      string `json:"body"`      // Aquí viene el texto
+	From      string `json:"from"`      // JID del remitente
+	FromName  string `json:"from_name"` // "Martín Medina"
+	ChatId    string `json:"chat_id"`
+	IsFromMe  bool   `json:"is_from_me"`
+	Timestamp string `json:"timestamp"`
 }
